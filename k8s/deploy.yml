@@ -1,0 +1,58 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: reactnative2-ingress
+spec:
+  rules:
+    - host: reactnative2-testreactnative-dev.empcbr.thoughtworks-labs.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: reactnative2
+                port: 
+                  number: 80
+  tls:
+  - hosts:
+    - reactnative2-testreactnative-dev.empcbr.thoughtworks-labs.net
+    secretName: letencryptkey
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reactnative2
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: reactnative2
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reactnative2
+  labels:
+    app: reactnative2
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 5
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: reactnative2
+  template:
+    metadata:
+      labels:
+        app: reactnative2
+    spec:
+      containers:
+      - name: reactnative2
+        image: 626109959667.dkr.ecr.us-east-1.amazonaws.com/reactnative2:{image-tag}
+        ports:
+        - containerPort: 80

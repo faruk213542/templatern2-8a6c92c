@@ -1,0 +1,21 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "reactnative2"
+  description: "Template React Native"
+  links:
+    - url: https://reactnative2-testreactnative-dev.empcbr.thoughtworks-labs.net
+      title: reactnative2
+      icon: dashboard
+  annotations:
+    circleci.com/project-slug: github/platform-dx/templatern2-8a6c92c
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug:  platform-dx/templatern2-8a6c92c
+    sonarqube.org/project-key: "reactnative2"
+    backstage.io/kubernetes-label-selector: "app=reactnative2"
+    backstage.io/adr-location: docs/adrs/
+
+spec:
+  type: website
+  lifecycle: experimental
+  owner: "demodx"
